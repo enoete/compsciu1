@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🖥️ Computer Architecture: Your Digital World Explained!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite;
+            z-index: -1;
+        }
+
+        body::before {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            top: -100px;
+            left: -100px;
+        }
+
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: titlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+            margin-top: 15px;
+        }
+
+        .learning-objectives {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            margin: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+        .section:nth-child(6) { animation-delay: 0.6s; }
+        .section:nth-child(7) { animation-delay: 0.7s; }
+        .section:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 5px solid #f5576c;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .emoji-icon {
+            font-size: 1.2em;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border-color: #764ba2;
+        }
+
+        .analogy-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .analogy-box::before {
+            content: '💡';
+            position: absolute;
+            font-size: 60px;
+            opacity: 0.2;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .component-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .component-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .component-card:hover::before {
+            opacity: 1;
+        }
+
+        .component-card:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .component-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .component-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .component-description {
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .interactive-demo {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px dashed #764ba2;
+        }
+
+        .demo-title {
+            font-size: 1.5em;
+            color: #764ba2;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            background: #e9ecef;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .memory-types {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .memory-card {
+            background: white;
+            border: 3px solid #764ba2;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .memory-card:hover {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .quiz-container {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .quiz-question {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 15px;
+        }
+
+        .quiz-option {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: #f8f9fa;
+            border-color: #764ba2;
+            transform: translateX(10px);
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            animation: correctPulse 0.6s;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            animation: shake 0.5s;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .fun-fact {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fun-fact::before {
+            content: '🎮';
+            position: absolute;
+            font-size: 60px;
+            opacity: 0.2;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.5s;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .interactive-computer {
+            background: #2d3436;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .computer-component {
+            position: absolute;
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .computer-component:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .component-info {
+            background: rgba(255,255,255,0.95);
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 400px;
+        }
+
+        .component-info.show {
+            display: block;
+            animation: popIn 0.3s;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .certificate {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border: 5px solid #ffd700;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            display: none;
+        }
+
+        .certificate.show {
+            display: block;
+            animation: certificateReveal 1s;
+        }
+
+        @keyframes certificateReveal {
+            from {
+                transform: scale(0) rotate(180deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .data-flow-animation {
+            background: #2d3436;
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            min-height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-packet {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #00ff00;
+            border-radius: 50%;
+            opacity: 0;
+            animation: dataFlow 3s ease-in-out;
+        }
+
+        @keyframes dataFlow {
+            0% { opacity: 1; transform: translateX(0); }
+            25% { transform: translateX(100px); }
+            50% { transform: translateX(200px); }
+            75% { transform: translateX(300px); }
+            100% { opacity: 0; transform: translateX(400px); }
+        }
+
+        .binary-display {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #0f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            min-height: 100px;
+            overflow-wrap: break-word;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin: 10px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 10px rgba(118, 75, 162, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .memory-types {
+                flex-direction: column;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="notification" class="notification"></div>
+
+    <div class="container">
+        <header>
+            <h1>🖥️ Computer Architecture Adventure!</h1>
+            <p class="subtitle">Unit 1: Fundamentals of Computer Science</p>
+            <p class="subtitle">Module 1: Understanding Your Digital World</p>
+        </header>
+
+        <div class="learning-objectives">
+            <h2 style="color: white; border: none;">🎯 Your Learning Quest</h2>
+            <p style="font-size: 1.2em; margin-top: 20px;">By the end of this adventure, you'll be able to:</p>
+            <ol style="margin: 20px 0; line-height: 2;">
+                <li>✨ Understand and explain what each computer component does (like a tech wizard!)</li>
+                <li>🔗 See how components work together (like a superhero team!)</li>
+                <li>💾 Know how computers store and represent data (the secret language of computers!)</li>
+            </ol>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0% Complete</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Introduction -->
+            <div class="section">
+                <h2><span class="emoji-icon">🚀</span> Welcome to Your Computer's Inner World!</h2>
+                
+                <div class="card">
+                    <div class="analogy-box">
+                        <h3>🏠 Think of a Computer Like a Super-Smart House!</h3>
+                        <p>
+                            Imagine your computer is like a high-tech house where different rooms have different jobs:
+                            <br><br>
+                            🧠 <strong>The CPU</strong> is like the house's brain/manager - making all decisions<br>
+                            📚 <strong>Memory (RAM)</strong> is like your desk - temporary workspace<br>
+                            💾 <strong>Storage</strong> is like your closet - keeps things long-term<br>
+                            🖼️ <strong>Display</strong> is like windows - shows you what's happening<br>
+                            ⌨️ <strong>Input devices</strong> are like doors - how you interact with the house<br>
+                            🔌 <strong>Power supply</strong> is like electricity - keeps everything running!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="fun-fact">
+                    <strong>Fun Fact:</strong> Your smartphone is actually a tiny computer! It has all the same components as a desktop computer, just miniaturized. That's why you can play games, watch videos, and even edit documents on it! 📱✨
+                </div>
+            </div>
+
+            <!-- Section 2: Hardware Components -->
+            <div class="section">
+                <h2><span class="emoji-icon">🔧</span> The Hardware Heroes</h2>
+                
+                <div class="card">
+                    <p style="font-size: 1.2em; margin-bottom: 20px;">
+                        Let's meet the physical components that make your computer work! Click on each component to learn more:
+                    </p>
+
+                    <div class="component-grid">
+                        <div class="component-card" onclick="showComponentDetail('cpu')">
+                            <div class="component-icon">🧠</div>
+                            <div class="component-title">CPU</div>
+                            <div class="component-description">The Brain - Processes all instructions</div>
+                        </div>
+
+                        <div class="component-card" onclick="showComponentDetail('ram')">
+                            <div class="component-icon">💨</div>
+                            <div class="component-title">RAM</div>
+                            <div class="component-description">Quick Memory - Super fast but temporary</div>
+                        </div>
+
+                        <div class="component-card" onclick="showComponentDetail('storage')">
+                            <div class="component-icon">💾</div>
+                            <div class="component-title">Storage (HDD/SSD)</div>
+                            <div class="component-description">Long-term Memory - Keeps data forever</div>
+                        </div>
+
+                        <div class="component-card" onclick="showComponentDetail('motherboard')">
+                            <div class="component-icon">🏗️</div>
+                            <div class="component-title">Motherboard</div>
+                            <div class="component-description">The City - Connects everything together</div>
+                        </div>
+
+                        <div class="component-card" onclick="showComponentDetail('gpu')">
+                            <div class="component-icon">🎮</div>
+                            <div class="component-title">GPU</div>
+                            <div class="component-description">Graphics Artist - Makes things look pretty</div>
+                        </div>
+
+                        <div class="component-card" onclick="showComponentDetail('power')">
+                            <div class="component-icon">⚡</div>
+                            <div class="component-title">Power Supply</div>
+                            <div class="component-description">The Heart - Pumps power to all parts</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Computer Diagram -->
+                <div class="interactive-demo">
+                    <div class="demo-title">🖥️ Interactive Computer - Click Components to Explore!</div>
+                    <div class="interactive-computer">
+                        <div class="computer-component" style="top: 20px; left: 20px;" onclick="showInfo('cpu')">CPU 🧠</div>
+                        <div class="computer-component" style="top: 20px; right: 20px;" onclick="showInfo('ram')">RAM 💨</div>
+                        <div class="computer-component" style="bottom: 20px; left: 20px;" onclick="showInfo('storage')">Storage 💾</div>
+                        <div class="computer-component" style="bottom: 20px; right: 20px;" onclick="showInfo('power')">Power ⚡</div>
+                        <div class="computer-component" style="top: 50%; left: 50%; transform: translate(-50%, -50%);" onclick="showInfo('motherboard')">Motherboard 🏗️</div>
+                        
+                        <div id="componentInfo" class="component-info">
+                            <h3 id="infoTitle"></h3>
+                            <p id="infoContent"></p>
+                            <button onclick="closeInfo()">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Input/Output Devices -->
+            <div class="section">
+                <h2><span class="emoji-icon">🎹</span> Input & Output Devices</h2>
+                
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('input')">⌨️ Input Devices</div>
+                    <div class="tab" onclick="switchTab('output')">🖥️ Output Devices</div>
+                    <div class="tab" onclick="switchTab('special')">✨ Special Devices</div>
+                </div>
+
+                <div id="input" class="tab-content active">
+                    <div class="card">
+                        <h3>📥 Input Devices - How You Talk to Your Computer</h3>
+                        
+                        <div class="analogy-box">
+                            <strong>Think of input devices as your computer's senses!</strong><br>
+                            Just like you have eyes to see and ears to hear, computers need input devices to understand what you want them to do.
+                        </div>
+
+                        <div class="component-grid" style="margin-top: 20px;">
+                            <div class="card">
+                                <h4>⌨️ Keyboard</h4>
+                                <p><strong>Purpose:</strong> Type text and commands</p>
+                                <p><strong>Port:</strong> USB, PS/2, or wireless</p>
+                                <p><strong>Speed:</strong> ~10-15ms response time</p>
+                                <p><strong>Fun Fact:</strong> QWERTY layout was designed to prevent typewriter jams!</p>
+                            </div>
+
+                            <div class="card">
+                                <h4>🖱️ Mouse</h4>
+                                <p><strong>Purpose:</strong> Point and click interface</p>
+                                <p><strong>Port:</strong> USB or wireless</p>
+                                <p><strong>Speed:</strong> 125-1000Hz polling rate</p>
+                                <p><strong>Quality:</strong> DPI (dots per inch) - higher = more precise</p>
+                            </div>
+
+                            <div class="card">
+                                <h4>🎤 Microphone</h4>
+                                <p><strong>Purpose:</strong> Audio input</p>
+                                <p><strong>Port:</strong> 3.5mm jack or USB</p>
+                                <p><strong>Quality:</strong> Measured in Hz (frequency range)</p>
+                                <p><strong>Cool Use:</strong> Voice commands and dictation!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="output" class="tab-content">
+                    <div class="card">
+                        <h3>📤 Output Devices - How Your Computer Talks to You</h3>
+                        
+                        <div class="analogy-box">
+                            <strong>Output devices are like your computer's voice and expressions!</strong><br>
+                            They show you what the computer is thinking and doing, just like how you express yourself through speaking and facial expressions.
+                        </div>
+
+                        <div class="component-grid" style="margin-top: 20px;">
+                            <div class="card">
+                                <h4>🖥️ Monitor</h4>
+                                <p><strong>Purpose:</strong> Visual display</p>
+                                <p><strong>Port:</strong> HDMI, DisplayPort, VGA</p>
+                                <p><strong>Quality:</strong> Resolution (1080p, 4K, etc.)</p>
+                                <p><strong>Speed:</strong> Refresh rate (60Hz, 144Hz for gaming)</p>
+                            </div>
+
+                            <div class="card">
+                                <h4>🔊 Speakers</h4>
+                                <p><strong>Purpose:</strong> Audio output</p>
+                                <p><strong>Port:</strong> 3.5mm jack, USB, Bluetooth</p>
+                                <p><strong>Quality:</strong> Frequency range and wattage</p>
+                                <p><strong>Cool Feature:</strong> Surround sound (5.1, 7.1 systems)</p>
+                            </div>
+
+                            <div class="card">
+                                <h4>🖨️ Printer</h4>
+                                <p><strong>Purpose:</strong> Physical document output</p>
+                                <p><strong>Port:</strong> USB, Network, Wireless</p>
+                                <p><strong>Speed:</strong> Pages per minute (PPM)</p>
+                                <p><strong>Quality:</strong> DPI (dots per inch)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="special" class="tab-content">
+                    <div class="card">
+                        <h3>🌟 Special & Accessibility Devices</h3>
+                        
+                        <div class="analogy-box">
+                            <strong>These are superhero devices that help everyone use computers!</strong><br>
+                            Just like how glasses help people see better, these devices make computers accessible to everyone.
+                        </div>
+
+                        <div class="component-grid" style="margin-top: 20px;">
+                            <div class="card">
+                                <h4>⠠⠊ Braille Keyboard</h4>
+                                <p><strong>Purpose:</strong> Input for visually impaired users</p>
+                                <p><strong>How it works:</strong> Raised dots represent letters</p>
+                                <p><strong>Amazing Fact:</strong> Can type as fast as regular keyboards!</p>
+                            </div>
+
+                            <div class="card">
+                                <h4>👆 Touch Screen</h4>
+                                <p><strong>Purpose:</strong> Input AND output in one!</p>
+                                <p><strong>Technology:</strong> Capacitive or resistive</p>
+                                <p><strong>Cool Feature:</strong> Multi-touch gestures</p>
+                            </div>
+
+                            <div class="card">
+                                <h4>🎹 Concept Keyboard</h4>
+                                <p><strong>Purpose:</strong> Customizable input device</p>
+                                <p><strong>Use Cases:</strong> Fast food ordering, special needs</p>
+                                <p><strong>Feature:</strong> Pictures instead of letters!</p>
+                            </div>
+
+                            <div class="card">
+                                <h4>🔍 Sensors</h4>
+                                <p><strong>Types:</strong> Motion, temperature, light</p>
+                                <p><strong>Purpose:</strong> Environmental input</p>
+                                <p><strong>Example:</strong> Your phone's auto-brightness!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Memory Types -->
+            <div class="section">
+                <h2><span class="emoji-icon">🧠</span> Memory Types - The Computer's Brain Storage</h2>
+                
+                <div class="card">
+                    <div class="analogy-box">
+                        <h3>🏠 Memory is Like Different Storage Areas in Your House!</h3>
+                        <p>
+                            <strong>RAM</strong> = Your desk - Quick access, but cleared when you leave<br>
+                            <strong>ROM</strong> = Your birth certificate - Permanent, can't be changed<br>
+                            <strong>EPROM</strong> = A whiteboard - Can be erased and rewritten<br>
+                            <strong>EEPROM</strong> = A smart notebook - Can be updated electronically
+                        </p>
+                    </div>
+
+                    <div class="memory-types">
+                        <div class="memory-card" onclick="showMemoryDetail('rom')">
+                            <h3>🔒 ROM</h3>
+                            <p><strong>Read-Only Memory</strong></p>
+                            <p>Permanent storage</p>
+                            <p>Cannot be changed</p>
+                        </div>
+
+                        <div class="memory-card" onclick="showMemoryDetail('ram')">
+                            <h3>⚡ RAM</h3>
+                            <p><strong>Random Access Memory</strong></p>
+                            <p>Super fast access</p>
+                            <p>Volatile (loses data when power off)</p>
+                        </div>
+
+                        <div class="memory-card" onclick="showMemoryDetail('eprom')">
+                            <h3>🔄 EPROM</h3>
+                            <p><strong>Erasable Programmable ROM</strong></p>
+                            <p>Can be erased with UV light</p>
+                            <p>Reprogrammable</p>
+                        </div>
+
+                        <div class="memory-card" onclick="showMemoryDetail('eeprom')">
+                            <h3>⚡ EEPROM</h3>
+                            <p><strong>Electrically Erasable ROM</strong></p>
+                            <p>Erased electronically</p>
+                            <p>Used in USB drives</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 30px;">📊 Memory Features Comparison</h3>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Memory Type</th>
+                                <th>Speed</th>
+                                <th>Size</th>
+                                <th>Word Size</th>
+                                <th>Volatility</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>RAM</strong></td>
+                                <td>Very Fast (ns)</td>
+                                <td>4-64 GB</td>
+                                <td>64-bit</td>
+                                <td>Volatile</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ROM</strong></td>
+                                <td>Fast (ns)</td>
+                                <td>Few MB</td>
+                                <td>8-32 bit</td>
+                                <td>Non-volatile</td>
+                            </tr>
+                            <tr>
+                                <td><strong>EPROM</strong></td>
+                                <td>Medium (μs)</td>
+                                <td>Few MB</td>
+                                <td>8-16 bit</td>
+                                <td>Non-volatile</td>
+                            </tr>
+                            <tr>
+                                <td><strong>EEPROM</strong></td>
+                                <td>Medium (μs)</td>
+                                <td>Few MB</td>
+                                <td>8-16 bit</td>
+                                <td>Non-volatile</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Section 5: Storage Devices -->
+            <div class="section">
+                <h2><span class="emoji-icon">💾</span> Storage Devices - Your Digital Closet</h2>
+                
+                <div class="card">
+                    <div class="analogy-box">
+                        <h3>🏠 Storage is Like Different Closets in Your House!</h3>
+                        <p>
+                            <strong>HDD</strong> = Big walk-in closet - Lots of space, but takes time to find things<br>
+                            <strong>SSD</strong> = Organized dresser - Smaller but you find things instantly<br>
+                            <strong>USB Drive</strong> = Portable suitcase - Take your stuff anywhere<br>
+                            <strong>Cloud Storage</strong> = Storage unit across town - Huge space, but need internet to access
+                        </p>
+                    </div>
+
+                    <div class="component-grid">
+                        <div class="card">
+                            <h3>💿 Hard Disk Drive (HDD)</h3>
+                            <p><strong>Capacity:</strong> 500GB - 20TB</p>
+                            <p><strong>Access Speed:</strong> 80-160 MB/s</p>
+                            <p><strong>Access Method:</strong> Sequential/Random</p>
+                            <p><strong>Portability:</strong> Internal (not portable)</p>
+                            <p><strong>How it works:</strong> Spinning disks with magnetic heads</p>
+                            <p><strong>Pro:</strong> Cheap per GB</p>
+                            <p><strong>Con:</strong> Slower, can break if dropped</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>⚡ Solid State Drive (SSD)</h3>
+                            <p><strong>Capacity:</strong> 120GB - 8TB</p>
+                            <p><strong>Access Speed:</strong> 200-7000 MB/s</p>
+                            <p><strong>Access Method:</strong> Random (instant)</p>
+                            <p><strong>Portability:</strong> Internal/External</p>
+                            <p><strong>How it works:</strong> Flash memory chips</p>
+                            <p><strong>Pro:</strong> Super fast, silent, durable</p>
+                            <p><strong>Con:</strong> More expensive per GB</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>🔌 USB Flash Drive</h3>
+                            <p><strong>Capacity:</strong> 4GB - 2TB</p>
+                            <p><strong>Access Speed:</strong> 10-400 MB/s</p>
+                            <p><strong>Access Method:</strong> Random</p>
+                            <p><strong>Portability:</strong> Highly portable</p>
+                            <p><strong>How it works:</strong> Flash memory</p>
+                            <p><strong>Pro:</strong> Tiny, portable, plug-and-play</p>
+                            <p><strong>Con:</strong> Easy to lose!</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>☁️ Cloud Storage</h3>
+                            <p><strong>Capacity:</strong> Unlimited (pay as you go)</p>
+                            <p><strong>Access Speed:</strong> Depends on internet</p>
+                            <p><strong>Access Method:</strong> Network-based</p>
+                            <p><strong>Portability:</strong> Access anywhere</p>
+                            <p><strong>How it works:</strong> Remote servers</p>
+                            <p><strong>Pro:</strong> Access from any device</p>
+                            <p><strong>Con:</strong> Needs internet connection</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <div class="demo-title">📊 Storage Speed Test Simulator</div>
+                        <button onclick="testStorageSpeed('hdd')">Test HDD Speed</button>
+                        <button onclick="testStorageSpeed('ssd')">Test SSD Speed</button>
+                        <button onclick="testStorageSpeed('usb')">Test USB Speed</button>
+                        <button onclick="testStorageSpeed('cloud')">Test Cloud Speed</button>
+                        <div id="speedTestResult" style="margin-top: 20px; padding: 20px; border-radius: 10px; background: #e9ecef; text-align: center; font-size: 1.2em;">
+                            Click a button to test storage speed!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Power Protection -->
+            <div class="section">
+                <h2><span class="emoji-icon">🛡️</span> Power Protection Warriors</h2>
+                
+                <div class="card">
+                    <div class="fun-fact">
+                        <strong>Did you know?</strong> A single power surge can fry your entire computer in milliseconds! That's why power protection is like having bodyguards for your PC! 💂‍♂️
+                    </div>
+
+                    <div class="component-grid" style="margin-top: 30px;">
+                        <div class="card">
+                            <h3>⚡ Surge Protector</h3>
+                            <div class="analogy-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                                <strong>Like a bouncer at a club!</strong><br>
+                                Only lets safe amounts of electricity through
+                            </div>
+                            <p><strong>Protects from:</strong> Voltage spikes</p>
+                            <p><strong>How:</strong> Diverts excess electricity to ground</p>
+                            <p><strong>Cost:</strong> $10-50</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>🔌 Voltage Regulator</h3>
+                            <div class="analogy-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                                <strong>Like cruise control in a car!</strong><br>
+                                Keeps voltage steady no matter what
+                            </div>
+                            <p><strong>Protects from:</strong> Voltage fluctuations</p>
+                            <p><strong>How:</strong> Maintains constant voltage output</p>
+                            <p><strong>Cost:</strong> $50-200</p>
+                        </div>
+
+                        <div class="card">
+                            <h3>🔋 UPS (Uninterruptible Power Supply)</h3>
+                            <div class="analogy-box" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white;">
+                                <strong>Like a backup generator!</strong><br>
+                                Keeps power flowing even during blackouts
+                            </div>
+                            <p><strong>Protects from:</strong> Power outages</p>
+                            <p><strong>How:</strong> Battery kicks in instantly</p>
+                            <p><strong>Runtime:</strong> 5-30 minutes typically</p>
+                            <p><strong>Cost:</strong> $100-1000+</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <div class="demo-title">⚡ Power Event Simulator</div>
+                        <button onclick="simulatePowerEvent('normal')">Normal Power</button>
+                        <button onclick="simulatePowerEvent('surge')">Power Surge!</button>
+                        <button onclick="simulatePowerEvent('outage')">Power Outage!</button>
+                        <button onclick="simulatePowerEvent('fluctuation')">Voltage Fluctuation!</button>
+                        <div id="powerStatus" style="margin-top: 20px; padding: 20px; border-radius: 10px; background: #e9ecef; text-align: center; font-size: 1.2em;">
+                            System Status: Running Normally ✅
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Types of Computers -->
+            <div class="section">
+                <h2><span class="emoji-icon">🖥️</span> Computer Family Tree</h2>
+                
+                <div class="card">
+                    <h3>🌟 Different Computers for Different Needs!</h3>
+                    
+                    <div class="analogy-box">
+                        <strong>Computers are like vehicles - each type is built for a specific purpose!</strong><br>
+                        Supercomputer = Formula 1 race car (maximum speed)<br>
+                        Server = City bus (serves many people)<br>
+                        Desktop = Family car (versatile and reliable)<br>
+                        Mobile = Bicycle (portable and personal)
+                    </div>
+
+                    <div class="tabs" style="margin-top: 30px;">
+                        <div class="tab active" onclick="switchComputerType('super')">🚀 Supercomputer</div>
+                        <div class="tab" onclick="switchComputerType('server')">🏢 Server</div>
+                        <div class="tab" onclick="switchComputerType('desktop')">🖥️ Desktop</div>
+                        <div class="tab" onclick="switchComputerType('mobile')">📱 Mobile</div>
+                    </div>
+
+                    <div id="super" class="tab-content active">
+                        <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <h3>🚀 Supercomputer - The Speed Demon</h3>
+                            <p><strong>Purpose:</strong> Solve humanity's biggest problems</p>
+                            <p><strong>Speed:</strong> Quadrillions of calculations per second!</p>
+                            <p><strong>Uses:</strong></p>
+                            <ul style="margin: 10px 0; line-height: 1.8;">
+                                <li>🌤️ Weather prediction</li>
+                                <li>🧬 DNA research</li>
+                                <li>🚀 Space exploration</li>
+                                <li>💊 Drug discovery</li>
+                            </ul>
+                            <p><strong>Example:</strong> Fugaku (Japan) - 442 petaFLOPS!</p>
+                            <p><strong>Cost:</strong> $100 million - $1 billion 😱</p>
+                            <p><strong>Fun Fact:</strong> Uses as much electricity as a small town!</p>
+                        </div>
+                    </div>
+
+                    <div id="server" class="tab-content">
+                        <div class="card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                            <h3>🏢 Server - The Team Player</h3>
+                            <p><strong>Purpose:</strong> Serve multiple users/computers</p>
+                            <p><strong>Always on:</strong> 24/7/365 operation</p>
+                            <p><strong>Types:</strong></p>
+                            <ul style="margin: 10px 0; line-height: 1.8;">
+                                <li>🌐 Web servers (host websites)</li>
+                                <li>📧 Email servers (handle emails)</li>
+                                <li>🎮 Game servers (multiplayer games)</li>
+                                <li>💾 File servers (store shared files)</li>
+                            </ul>
+                            <p><strong>Example:</strong> Google has 2.5 million servers!</p>
+                            <p><strong>Special Features:</strong> Redundancy, hot-swappable parts</p>
+                            <p><strong>Fun Fact:</strong> Netflix uses 100,000+ servers to stream shows!</p>
+                        </div>
+                    </div>
+
+                    <div id="desktop" class="tab-content">
+                        <div class="card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                            <h3>🖥️ Desktop/Microcomputer - The All-Rounder</h3>
+                            <p><strong>Purpose:</strong> Personal computing for individuals</p>
+                            <p><strong>Also called:</strong> PC, Workstation, Microcomputer</p>
+                            <p><strong>Configurations:</strong></p>
+                            <ul style="margin: 10px 0; line-height: 1.8;">
+                                <li>🏠 Home PC (browsing, entertainment)</li>
+                                <li>🎮 Gaming PC (high-end graphics)</li>
+                                <li>💼 Office PC (productivity)</li>
+                                <li>🎨 Workstation (professional creative work)</li>
+                            </ul>
+                            <p><strong>Price Range:</strong> $300 - $5000+</p>
+                            <p><strong>Customizable:</strong> Build your own or buy pre-built</p>
+                            <p><strong>Fun Fact:</strong> The first PC (1975) had only 256 bytes of RAM!</p>
+                        </div>
+                    </div>
+
+                    <div id="mobile" class="tab-content">
+                        <div class="card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white;">
+                            <h3>📱 Mobile Devices - Computing On-The-Go</h3>
+                            <p><strong>Purpose:</strong> Portable personal computing</p>
+                            <p><strong>Types:</strong></p>
+                            <ul style="margin: 10px 0; line-height: 1.8;">
+                                <li>📱 Smartphones (pocket computers)</li>
+                                <li>📲 Tablets (bigger screen, touch-first)</li>
+                                <li>💻 Laptops (full PC experience, portable)</li>
+                                <li>⌚ Smartwatches (wearable computers)</li>
+                            </ul>
+                            <p><strong>Special Features:</strong> Battery powered, touch screens, sensors</p>
+                            <p><strong>Power:</strong> Your phone is 1000x more powerful than Apollo 11's computer!</p>
+                            <p><strong>Fun Fact:</strong> 6.8 billion smartphone users worldwide!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: How Components Work Together -->
+            <div class="section">
+                <h2><span class="emoji-icon">🔗</span> The Digital Orchestra - How It All Works Together</h2>
+                
+                <div class="card">
+                    <div class="analogy-box">
+                        <h3>🎭 Your Computer is Like a Restaurant!</h3>
+                        <p>
+                            <strong>You (User)</strong> = The customer placing an order<br>
+                            <strong>Input Devices</strong> = The waiter taking your order<br>
+                            <strong>CPU</strong> = The chef preparing your meal<br>
+                            <strong>RAM</strong> = The kitchen counter (workspace)<br>
+                            <strong>Storage</strong> = The pantry (ingredients storage)<br>
+                            <strong>Output Devices</strong> = The waiter bringing your food<br>
+                            <strong>Motherboard</strong> = The restaurant building connecting everything<br>
+                            <strong>Power Supply</strong> = The electricity keeping lights and ovens on!
+                        </p>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <div class="demo-title">🎬 Watch Data Flow Through Your Computer!</div>
+                        <button onclick="startDataFlow()">Start Animation</button>
+                        <div class="data-flow-animation" id="dataFlowDisplay">
+                            <p id="flowStep">Click "Start Animation" to see how your computer processes a task!</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 30px;">🔄 The Complete Process</h3>
+                    <ol style="line-height: 2; font-size: 1.1em;">
+                        <li>📥 <strong>Input:</strong> You type a letter 'A' on the keyboard</li>
+                        <li>🔌 <strong>Signal:</strong> Keyboard sends electrical signal through USB</li>
+                        <li>🏗️ <strong>Motherboard:</strong> Routes signal to CPU</li>
+                        <li>🧠 <strong>CPU:</strong> Processes the input ("User pressed 'A'")</li>
+                        <li>💨 <strong>RAM:</strong> Temporarily stores the letter</li>
+                        <li>🖥️ <strong>GPU:</strong> Prepares visual representation</li>
+                        <li>📤 <strong>Output:</strong> Monitor displays the letter 'A'</li>
+                        <li>💾 <strong>Storage:</strong> If in a document, saves to disk</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Section 9: Data Representation -->
+            <div class="section">
+                <h2><span class="emoji-icon">🔢</span> The Secret Language of Computers - Binary!</h2>
+                
+                <div class="card">
+                    <div class="analogy-box">
+                        <h3>💡 Binary is Like a Light Switch!</h3>
+                        <p>
+                            Computers only understand ON (1) and OFF (0). Everything you see - text, images, videos - is secretly just millions of 1s and 0s!<br><br>
+                            Think of it like Morse code: Instead of dots and dashes, computers use 1s and 0s to represent everything!
+                        </p>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <div class="demo-title">🔄 Binary Converter - See The Magic!</div>
+                        <input type="text" id="textInput" placeholder="Type something..." maxlength="20">
+                        <button onclick="convertToBinary()">Convert to Binary</button>
+                        <div class="binary-display" id="binaryOutput">
+                            Binary will appear here...
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 30px;">📊 How Computers Store Different Types of Data</h3>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Data Type</th>
+                                <th>Example</th>
+                                <th>How It's Stored</th>
+                                <th>Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Text</strong></td>
+                                <td>Letter 'A'</td>
+                                <td>ASCII: 01000001</td>
+                                <td>1 byte (8 bits)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Number</strong></td>
+                                <td>42</td>
+                                <td>Binary: 00101010</td>
+                                <td>1-8 bytes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Image</strong></td>
+                                <td>📷 Photo</td>
+                                <td>Pixels as RGB values</td>
+                                <td>~2-10 MB</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sound</strong></td>
+                                <td>🎵 Music</td>
+                                <td>Wave samples</td>
+                                <td>~3-10 MB/minute</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Video</strong></td>
+                                <td>🎬 Movie</td>
+                                <td>Frames + Audio</td>
+                                <td>~1-4 GB/hour</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="fun-fact">
+                        <strong>Mind-Blowing Fact:</strong> This entire webpage you're reading is just millions of 1s and 0s! Your computer is translating binary code into colors, text, and animations in real-time! 🤯
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 10: Quiz -->
+            <div class="section">
+                <h2><span class="emoji-icon">🧠</span> Test Your Knowledge!</h2>
+                
+                <div class="quiz-container">
+                    <div class="quiz-question" id="quizQuestion">
+                        What is the main purpose of the CPU in a computer?
+                    </div>
+                    <div class="quiz-options" id="quizOptions">
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">Store data permanently</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">Process instructions and calculations</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">Display images on screen</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">Connect to the internet</div>
+                    </div>
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button onclick="nextQuestion()">Next Question</button>
+                        <p id="quizScore" style="margin-top: 10px; font-weight: bold;">Score: 0/5</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificate -->
+            <div class="certificate" id="certificate">
+                <h2>🏆 Congratulations!</h2>
+                <h3>Certificate of Completion</h3>
+                <p style="font-size: 1.2em; margin: 20px 0;">
+                    You have successfully completed the<br>
+                    <strong>Computer Architecture Adventure!</strong>
+                </p>
+                <p>You are now a certified Computer Architecture Explorer! 🎉</p>
+                <p style="margin-top: 20px; font-size: 0.9em;">
+                    Date: <span id="certificateDate"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let progress = 0;
+        let quizScore = 0;
+        let currentQuestion = 0;
+        const totalQuestions = 5;
+
+        // Quiz questions
+        const quizQuestions = [
+            {
+                question: "What is the main purpose of the CPU in a computer?",
+                options: ["Store data permanently", "Process instructions and calculations", "Display images on screen", "Connect to the internet"],
+                correct: 1
+            },
+            {
+                question: "Which memory type loses its data when power is turned off?",
+                options: ["ROM", "RAM", "EPROM", "EEPROM"],
+                correct: 1
+            },
+            {
+                question: "What does SSD stand for?",
+                options: ["Super Speed Drive", "Solid State Drive", "System Storage Device", "Secure Storage Disk"],
+                correct: 1
+            },
+            {
+                question: "Which device is considered both input AND output?",
+                options: ["Keyboard", "Monitor", "Touch Screen", "Speakers"],
+                correct: 2
+            },
+            {
+                question: "What number system do computers use internally?",
+                options: ["Decimal (base 10)", "Binary (base 2)", "Hexadecimal (base 16)", "Octal (base 8)"],
+                correct: 1
+            }
+        ];
+
+        // Update progress as user scrolls
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollProgress = (scrolled / height) * 100;
+            updateProgress(scrollProgress);
+        });
+
+        function updateProgress(value) {
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = value + '%';
+            progressBar.textContent = Math.round(value) + '% Complete';
+            
+            if (value >= 90 && quizScore >= 3) {
+                showCertificate();
+            }
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Update tab styles
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            showNotification(`Switched to ${tabName} devices!`);
+        }
+
+        function switchComputerType(type) {
+            // Hide all computer type contents
+            document.querySelectorAll('#super, #server, #desktop, #mobile').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected computer type
+            document.getElementById(type).classList.add('active');
+            
+            // Update tab styles
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const typeNames = {
+                'super': 'Supercomputer',
+                'server': 'Server',
+                'desktop': 'Desktop',
+                'mobile': 'Mobile Device'
+            };
+            
+            showNotification(`Learning about ${typeNames[type]}!`);
+        }
+
+        function showComponentDetail(component) {
+            const details = {
+                'cpu': {
+                    title: '🧠 CPU - The Brain',
+                    content: 'The Central Processing Unit executes instructions and performs calculations. It\'s like the brain of your computer, making billions of decisions per second! Modern CPUs have multiple cores, like having multiple brains working together.'
+                },
+                'ram': {
+                    title: '💨 RAM - Quick Memory',
+                    content: 'Random Access Memory provides super-fast temporary storage. Think of it as your computer\'s desk - the bigger the desk, the more projects you can work on at once! When you turn off your computer, RAM loses all its data.'
+                },
+                'storage': {
+                    title: '💾 Storage - Long-term Memory',
+                    content: 'Storage devices like HDDs and SSDs keep your data safe even when the power is off. It\'s like your computer\'s closet - storing all your files, programs, and the operating system permanently.'
+                },
+                'motherboard': {
+                    title: '🏗️ Motherboard - The City',
+                    content: 'The motherboard connects all components together with circuits and pathways. It\'s like a city with roads connecting different neighborhoods (components). Everything plugs into the motherboard!'
+                },
+                'gpu': {
+                    title: '🎮 GPU - Graphics Artist',
+                    content: 'The Graphics Processing Unit specializes in rendering images and videos. It\'s like having a dedicated artist that\'s incredibly fast at drawing and painting, especially for games and video editing.'
+                },
+                'power': {
+                    title: '⚡ Power Supply - The Heart',
+                    content: 'The Power Supply Unit converts wall electricity into the specific voltages your computer needs. It\'s like the heart pumping blood (electricity) to all organs (components) at just the right pressure.'
+                }
+            };
+            
+            const detail = details[component];
+            showNotification(`Learning about ${detail.title}!`);
+            
+            // Create a temporary popup
+            const popup = document.createElement('div');
+            popup.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                z-index: 1000;
+                max-width: 500px;
+                animation: popIn 0.3s;
+            `;
+            popup.innerHTML = `
+                <h3>${detail.title}</h3>
+                <p style="margin: 15px 0; line-height: 1.6;">${detail.content}</p>
+                <button onclick="this.parentElement.remove()" style="margin-top: 15px;">Got it!</button>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        function showInfo(component) {
+            const info = document.getElementById('componentInfo');
+            const title = document.getElementById('infoTitle');
+            const content = document.getElementById('infoContent');
+            
+            const componentData = {
+                'cpu': {
+                    title: '🧠 CPU - Central Processing Unit',
+                    content: 'The brain of the computer! Executes instructions, performs calculations, and controls other components. Modern CPUs can perform billions of operations per second.'
+                },
+                'ram': {
+                    title: '💨 RAM - Random Access Memory',
+                    content: 'Temporary, super-fast storage for active programs and data. The more RAM you have, the more programs you can run simultaneously without slowing down.'
+                },
+                'storage': {
+                    title: '💾 Storage - Hard Drive/SSD',
+                    content: 'Permanent storage for your files, programs, and operating system. SSDs are faster but more expensive than traditional hard drives.'
+                },
+                'power': {
+                    title: '⚡ Power Supply Unit',
+                    content: 'Converts AC power from the wall outlet into DC power that computer components can use. Different components need different voltages.'
+                },
+                'motherboard': {
+                    title: '🏗️ Motherboard',
+                    content: 'The main circuit board that connects all components together. It provides communication pathways and power distribution to all parts.'
+                }
+            };
+            
+            const data = componentData[component];
+            title.textContent = data.title;
+            content.textContent = data.content;
+            info.classList.add('show');
+        }
+
+        function closeInfo() {
+            document.getElementById('componentInfo').classList.remove('show');
+        }
+
+        function showMemoryDetail(type) {
+            const details = {
+                'rom': 'ROM (Read-Only Memory) contains permanent instructions that cannot be changed. It stores the basic startup instructions for your computer.',
+                'ram': 'RAM (Random Access Memory) is volatile memory that provides fast access to data currently being used. It loses all data when power is turned off.',
+                'eprom': 'EPROM (Erasable Programmable ROM) can be erased using ultraviolet light and reprogrammed. Used in development and specialized applications.',
+                'eeprom': 'EEPROM (Electrically Erasable ROM) can be erased and reprogrammed electronically. Found in USB drives and modern storage devices.'
+            };
+            
+            showNotification(details[type]);
+        }
+
+        function testStorageSpeed(type) {
+            const results = {
+                'hdd': { speed: '120 MB/s', time: '8.3 seconds', description: 'Traditional spinning disk - reliable but slower' },
+                'ssd': { speed: '550 MB/s', time: '1.8 seconds', description: 'Solid state - super fast and silent!' },
+                'usb': { speed: '45 MB/s', time: '22 seconds', description: 'Portable but limited by USB interface' },
+                'cloud': { speed: '25 MB/s', time: '40 seconds', description: 'Speed depends on your internet connection' }
+            };
+            
+            const result = results[type];
+            const display = document.getElementById('speedTestResult');
+            
+            display.innerHTML = `
+                <h4>Testing ${type.toUpperCase()} Speed...</h4>
+                <div style="margin: 15px 0;">
+                    <div style="background: #007bff; height: 20px; border-radius: 10px; animation: loadingBar 2s ease-in-out;"></div>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                display.innerHTML = `
+                    <h4>${type.toUpperCase()} Test Results:</h4>
+                    <p><strong>Speed:</strong> ${result.speed}</p>
+                    <p><strong>Time to transfer 1GB:</strong> ${result.time}</p>
+                    <p><em>${result.description}</em></p>
+                `;
+            }, 2000);
+        }
+
+        function simulatePowerEvent(event) {
+            const status = document.getElementById('powerStatus');
+            const events = {
+                'normal': {
+                    text: 'System Status: Running Normally ✅',
+                    color: '#d4edda',
+                    border: '#28a745'
+                },
+                'surge': {
+                    text: 'POWER SURGE DETECTED! ⚡ Surge protector activated! System protected! 🛡️',
+                    color: '#fff3cd',
+                    border: '#ffc107'
+                },
+                'outage': {
+                    text: 'POWER OUTAGE! 🔋 UPS activated! You have 15 minutes to save your work! ⏰',
+                    color: '#f8d7da',
+                    border: '#dc3545'
+                },
+                'fluctuation': {
+                    text: 'Voltage fluctuation detected! 📊 Voltage regulator stabilizing power... ⚖️',
+                    color: '#d1ecf1',
+                    border: '#17a2b8'
+                }
+            };
+            
+            const eventData = events[event];
+            status.textContent = eventData.text;
+            status.style.background = eventData.color;
+            status.style.border = `2px solid ${eventData.border}`;
+            status.style.animation = 'shake 0.5s';
+            
+            setTimeout(() => {
+                status.style.animation = '';
+            }, 500);
+        }
+
+        function startDataFlow() {
+            const display = document.getElementById('dataFlowDisplay');
+            const steps = [
+                '1. 📥 User types "Hello" on keyboard...',
+                '2. 🔌 Keyboard sends electrical signals via USB...',
+                '3. 🏗️ Motherboard routes signals to CPU...',
+                '4. 🧠 CPU processes the input data...',
+                '5. 💨 RAM temporarily stores the text...',
+                '6. 🎮 GPU prepares visual representation...',
+                '7. 📤 Monitor displays "Hello" on screen!',
+                '8. ✅ Process complete! Data successfully processed!'
+            ];
+            
+            let currentStep = 0;
+            const stepElement = document.getElementById('flowStep');
+            
+            // Create animated data packet
+            const packet = document.createElement('div');
+            packet.className = 'data-packet';
+            display.appendChild(packet);
+            
+            const interval = setInterval(() => {
+                if (currentStep < steps.length) {
+                    stepElement.textContent = steps[currentStep];
+                    currentStep++;
+                } else {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        packet.remove();
+                        stepElement.textContent = 'Click "Start Animation" to see the process again!';
+                    }, 1000);
+                }
+            }, 800);
+        }
+
+        function convertToBinary() {
+            const input = document.getElementById('textInput').value;
+            const output = document.getElementById('binaryOutput');
+            
+            if (!input) {
+                output.textContent = 'Please type something first!';
+                return;
+            }
+            
+            let binary = '';
+            for (let i = 0; i < input.length; i++) {
+                const char = input[i];
+                const ascii = char.charCodeAt(0);
+                const binaryChar = ascii.toString(2).padStart(8, '0');
+                binary += `${char} = ${binaryChar}\n`;
+            }
+            
+            output.textContent = binary;
+            showNotification('Text converted to binary!');
+        }
+
+        function checkAnswer(element, isCorrect) {
+            // Disable all options
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                quizScore++;
+                showNotification('Correct! Great job! 🎉');
+            } else {
+                element.classList.add('incorrect');
+                // Show correct answer
+                document.querySelectorAll('.quiz-option').forEach((option, index) => {
+                    if (index === quizQuestions[currentQuestion].correct) {
+                        option.classList.add('correct');
+                    }
+                });
+                showNotification('Not quite right, but keep learning! 💪');
+            }
+            
+            document.getElementById('quizScore').textContent = `Score: ${quizScore}/${totalQuestions}`;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            
+            if (currentQuestion >= totalQuestions) {
+                // Quiz completed
+                const quizContainer = document.querySelector('.quiz-container');
+                quizContainer.innerHTML = `
+                    <div style="text-align: center;">
+                        <h3>🎉 Quiz Completed!</h3>
+                        <p style="font-size: 1.2em; margin: 20px 0;">
+                            Final Score: ${quizScore}/${totalQuestions}
+                        </p>
+                        <p>${quizScore >= 3 ? 'Excellent work! You\'re ready for your certificate! 🏆' : 'Good effort! Review the material and try again! 📚'}</p>
+                        <button onclick="restartQuiz()">Take Quiz Again</button>
+                    </div>
+                `;
+                
+                if (quizScore >= 3) {
+                    setTimeout(() => {
+                        updateProgress(100);
+                    }, 1000);
+                }
+                return;
+            }
+            
+            // Load next question
+            const question = quizQuestions[currentQuestion];
+            document.getElementById('quizQuestion').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                optionElement.textContent = option;
+                optionElement.onclick = () => checkAnswer(optionElement, index === question.correct);
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            quizScore = 0;
+            
+            const question = quizQuestions[0];
+            document.querySelector('.quiz-container').innerHTML = `
+                <div class="quiz-question" id="quizQuestion">${question.question}</div>
+                <div class="quiz-options" id="quizOptions"></div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <button onclick="nextQuestion()">Next Question</button>
+                    <p id="quizScore" style="margin-top: 10px; font-weight: bold;">Score: 0/${totalQuestions}</p>
+                </div>
+            `;
+            
+            const optionsContainer = document.getElementById('quizOptions');
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                optionElement.textContent = option;
+                optionElement.onclick = () => checkAnswer(optionElement, index === question.correct);
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        function showCertificate() {
+            const certificate = document.getElementById('certificate');
+            const dateElement = document.getElementById('certificateDate');
+            dateElement.textContent = new Date().toLocaleDateString();
+            certificate.classList.add('show');
+            showNotification('🏆 Congratulations! You earned your certificate!');
+        }
+
+        // Add loading bar animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes loadingBar {
+                from { width: 0%; }
+                to { width: 100%; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize first quiz question
+        window.addEventListener('load', () => {
+            showNotification('Welcome to Computer Architecture Adventure! 🚀');
+        });
+    </script>
+</body>
+</html>
+
